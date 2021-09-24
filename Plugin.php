@@ -12,6 +12,25 @@ class Plugin extends \MapasCulturais\Plugin {
             $app->view->enqueueScript('app' , 'tiebreaker', 'js/tiebreaker.js');
             $this->part('tiebreaker/agentbirthdata', ['entity' => $entity]);
         });
+
+        $app->hook('template(opportunity.single.header-inscritos):end', function() use ($app){
+            $app->view->enqueueScript('app' , 'tiebreaker', 'js/tiebreaker.js');
+            $app->view->enqueueStyle('app' , 'tiebreaker' , 'css/tiebreaker--styles.css');
+            $entity = $this->controller->requestedEntity;
+            $resource = false;
+            //VERIFICANDO SE TEM A INDICAÇÃO DE RECURSO
+            $isResource = array_key_exists('claimDisabled', $entity->metadata);
+            //SE HOUVER O CAMPO FAZ O FOREACH
+            if($isResource) {
+                foreach ($entity->metadata as $key => $value) {
+                    //SE O CAMPO EXISTIR E TIVER RECURSO HABILITADO
+                    if($key == 'claimDisabled' && $value == 0) {
+                        $resource = true;
+                    }
+                }
+            }
+            $this->part('tiebreaker/buttons-report',['resource' => $resource]);
+        });
     }
 
     public  function register() {

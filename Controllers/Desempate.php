@@ -4,6 +4,8 @@ namespace Tiebreaker\Controllers;
 use DateTime;
 use \MapasCulturais\App;
 use MapasCulturais\Entities\OpportunityMeta;
+require dirname(__DIR__).'/vendor/autoload.php';
+use Dompdf\Dompdf;
 /**
  * DEFINIÇÃO DA ORDEM
  * 1 - Idade igual ou superior a 60 (sessenta) anos;
@@ -14,6 +16,14 @@ use MapasCulturais\Entities\OpportunityMeta;
 class Desempate extends \MapasCulturais\Controller{
 
     function GET_index() {
-        dump('Tiebreaker');
+        dump('POOOO');
+
+        $domPdf = new Dompdf(array('enable_remote' => true));
+        dump($domPdf);
+            
+    }
+
+    function POST_gerarPdf() {
+        dump($this->postData['selectRel']);
     }
 }

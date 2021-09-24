@@ -1,0 +1,8 @@
+.box-select-tiebreaker{
+    margin-bottom: 10px;
+    border: 1px solid #c3c3c3;
+    border-radius: 8px;
+    padding: 5px;
+    /* box-shadow: 10px 5px 5px black; */
+    box-shadow: 2px 2px 2px 1px rgb(0 0 0 / 20%);
+}
